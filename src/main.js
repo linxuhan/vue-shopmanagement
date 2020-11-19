@@ -12,6 +12,12 @@ import axios from 'axios'
 Vue.use(ElementUI)
 
 axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
+axios.withCredentials = false
+axios.interceptors.request.use(config => {
+  console.log(config);
+  config.headers.authorization = window.sessionStorage.getItem('token')
+  return config
+})
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
